@@ -133,6 +133,12 @@
 		DC5CC39F249C0F5900355CC6 /* TestSecrets.json in Resources */ = {isa = PBXBuildFile; fileRef = DC9A4C9123D161A200D37CEC /* TestSecrets.json */; };
 		DC5CC3A0249C0F5900355CC6 /* TestSecrets.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC0446A2239716860072F597 /* TestSecrets.swift */; };
 		DC5CC3A1249C0F5900355CC6 /* TestSecretsStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC0446A0239716530072F597 /* TestSecretsStore.swift */; };
+		DC6F025E24CB91EA0098A853 /* Foo.m in Sources */ = {isa = PBXBuildFile; fileRef = DC6F025D24CB91EA0098A853 /* Foo.m */; };
+		DC6F025F24CB91EA0098A853 /* Foo.m in Sources */ = {isa = PBXBuildFile; fileRef = DC6F025D24CB91EA0098A853 /* Foo.m */; };
+		DC6F026224CF33020098A853 /* TVIInAppScreenCapturer.m in Sources */ = {isa = PBXBuildFile; fileRef = DC6F026124CF33020098A853 /* TVIInAppScreenCapturer.m */; };
+		DC6F026324CF33020098A853 /* TVIInAppScreenCapturer.m in Sources */ = {isa = PBXBuildFile; fileRef = DC6F026124CF33020098A853 /* TVIInAppScreenCapturer.m */; };
+		DC6F026624CF360B0098A853 /* TVIReplayKitVideoSource.m in Sources */ = {isa = PBXBuildFile; fileRef = DC6F026524CF360B0098A853 /* TVIReplayKitVideoSource.m */; };
+		DC6F026724CF360B0098A853 /* TVIReplayKitVideoSource.m in Sources */ = {isa = PBXBuildFile; fileRef = DC6F026524CF360B0098A853 /* TVIReplayKitVideoSource.m */; };
 		DC76FD0224105500001B2FFC /* EnvironmentVariableStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC76FD00241054FC001B2FFC /* EnvironmentVariableStore.swift */; };
 		DC76FD0324105501001B2FFC /* EnvironmentVariableStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC76FD00241054FC001B2FFC /* EnvironmentVariableStore.swift */; };
 		DC82A35023FC9AAA0081578C /* JSONContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC82A34E23FC9AAA0081578C /* JSONContainer.swift */; };
@@ -516,6 +522,12 @@
 		DC5CC38D249C0EC000355CC6 /* Video-InternalUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Video-InternalUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DC5CC391249C0EC000355CC6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DC6EABBE2357CAC50064E9E0 /* MockAppSettingsStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockAppSettingsStore.swift; sourceTree = "<group>"; };
+		DC6F025C24CB80E50098A853 /* TVIInAppScreenCapturer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TVIInAppScreenCapturer.h; sourceTree = "<group>"; };
+		DC6F025D24CB91EA0098A853 /* Foo.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Foo.m; sourceTree = "<group>"; };
+		DC6F026024CB922B0098A853 /* Foo.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Foo.h; sourceTree = "<group>"; };
+		DC6F026124CF33020098A853 /* TVIInAppScreenCapturer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TVIInAppScreenCapturer.m; sourceTree = "<group>"; };
+		DC6F026424CF35F20098A853 /* TVIReplayKitVideoSource.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TVIReplayKitVideoSource.h; sourceTree = "<group>"; };
+		DC6F026524CF360B0098A853 /* TVIReplayKitVideoSource.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TVIReplayKitVideoSource.m; sourceTree = "<group>"; };
 		DC76FD00241054FC001B2FFC /* EnvironmentVariableStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnvironmentVariableStore.swift; sourceTree = "<group>"; };
 		DC78CAB924352FEE006D3FAA /* RoomTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomTests.swift; sourceTree = "<group>"; };
 		DC78CABB243547CB006D3FAA /* RoomActivities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomActivities.swift; sourceTree = "<group>"; };
@@ -773,6 +785,7 @@
 				24A723E81ECE1D2A00486E7A /* Views */,
 				241282461E36A6AB002198BE /* Assets.xcassets */,
 				24C5217720FFAD030018E2D8 /* Bridging-Header.h */,
+				DC6F026824CF36180098A853 /* InAppScreenCapture */,
 				2412824B1E36A6AB002198BE /* Info.plist */,
 				24480A451EF07716003BCF00 /* Video.entitlements */,
 			);
@@ -1072,6 +1085,35 @@
 				DC5CC391249C0EC000355CC6 /* Info.plist */,
 			);
 			path = "Video-InternalUITests";
+			sourceTree = "<group>";
+		};
+		DC6F026824CF36180098A853 /* InAppScreenCapture */ = {
+			isa = PBXGroup;
+			children = (
+				DC6F026A24CF362F0098A853 /* Interface */,
+				DC6F026924CF36250098A853 /* Usage */,
+			);
+			path = InAppScreenCapture;
+			sourceTree = "<group>";
+		};
+		DC6F026924CF36250098A853 /* Usage */ = {
+			isa = PBXGroup;
+			children = (
+				DC6F026024CB922B0098A853 /* Foo.h */,
+				DC6F025D24CB91EA0098A853 /* Foo.m */,
+			);
+			path = Usage;
+			sourceTree = "<group>";
+		};
+		DC6F026A24CF362F0098A853 /* Interface */ = {
+			isa = PBXGroup;
+			children = (
+				DC6F025C24CB80E50098A853 /* TVIInAppScreenCapturer.h */,
+				DC6F026124CF33020098A853 /* TVIInAppScreenCapturer.m */,
+				DC6F026424CF35F20098A853 /* TVIReplayKitVideoSource.h */,
+				DC6F026524CF360B0098A853 /* TVIReplayKitVideoSource.m */,
+			);
+			path = Interface;
 			sourceTree = "<group>";
 		};
 		DC76FCFF241054A3001B2FFC /* EnvironmentVariable */ = {
@@ -2248,6 +2290,7 @@
 				DC9A5E06245DDC1000E4B079 /* RoomViewModelData.swift in Sources */,
 				DC82A35D23FDB9420081578C /* SDKLogLevelSettingsViewModel.swift in Sources */,
 				DCAEBF15238331A800141D2D /* SwitchCell.swift in Sources */,
+				DC6F026224CF33020098A853 /* TVIInAppScreenCapturer.m in Sources */,
 				DC9A5E0A245DFFC100E4B079 /* ParticipantsStore.swift in Sources */,
 				DC82A35023FC9AAA0081578C /* JSONContainer.swift in Sources */,
 				DC9A5DD7245B90BA00E4B079 /* ParticipantCell.swift in Sources */,
@@ -2297,6 +2340,7 @@
 				DC44C2E723876AFB00205174 /* SelectOptionSegueSender.swift in Sources */,
 				DCB7C18F2405C0BE009DEA70 /* KeychainStorage.swift in Sources */,
 				DC44C2E323875C4F00205174 /* StringHelpers.swift in Sources */,
+				DC6F025E24CB91EA0098A853 /* Foo.m in Sources */,
 				DCF4614D238598C700DD8FEA /* SettingsViewModel.swift in Sources */,
 				DCC7E36B24085AD800431AC3 /* APIError.swift in Sources */,
 				DC8AA8AE236228A3006C06D5 /* AuthStoreFactory.swift in Sources */,
@@ -2323,6 +2367,7 @@
 				DCA80B2D236C77C6009141C9 /* LaunchFlowFactory.swift in Sources */,
 				DCA5394D235F740200CA26FB /* AuthStore.swift in Sources */,
 				24C5217A20FFAD030018E2D8 /* EmailPasswordLoginViewController.swift in Sources */,
+				DC6F026624CF360B0098A853 /* TVIReplayKitVideoSource.m in Sources */,
 				DCD940B2243B9B7A00D9ECC5 /* ConnectOptionsFactory.swift in Sources */,
 				DCEDB3982475D476006AF70D /* SelectLowRenderDimensionsViewModelFactory.swift in Sources */,
 				DCC7E35A2407081F00431AC3 /* SignInSegueIdentifierFactory.swift in Sources */,
@@ -2419,6 +2464,7 @@
 				DC9A5E07245DDC1000E4B079 /* RoomViewModelData.swift in Sources */,
 				DC82A35E23FDB9420081578C /* SDKLogLevelSettingsViewModel.swift in Sources */,
 				DCAEBF16238331A800141D2D /* SwitchCell.swift in Sources */,
+				DC6F026324CF33020098A853 /* TVIInAppScreenCapturer.m in Sources */,
 				DC9A5E0B245DFFC100E4B079 /* ParticipantsStore.swift in Sources */,
 				DC82A35123FC9AAA0081578C /* JSONContainer.swift in Sources */,
 				DC9A5DD8245B90BB00E4B079 /* ParticipantCell.swift in Sources */,
@@ -2468,6 +2514,7 @@
 				DC44C2E823876AFB00205174 /* SelectOptionSegueSender.swift in Sources */,
 				DCB7C1902405C0BE009DEA70 /* KeychainStorage.swift in Sources */,
 				DC44C2E423875C4F00205174 /* StringHelpers.swift in Sources */,
+				DC6F025F24CB91EA0098A853 /* Foo.m in Sources */,
 				DCF4614E238598C700DD8FEA /* SettingsViewModel.swift in Sources */,
 				DCC7E36C24085AD800431AC3 /* APIError.swift in Sources */,
 				DC8AA8AF236228A3006C06D5 /* AuthStoreFactory.swift in Sources */,
@@ -2494,6 +2541,7 @@
 				DCA80B2E236C77C6009141C9 /* LaunchFlowFactory.swift in Sources */,
 				DCA5394E235F740200CA26FB /* AuthStore.swift in Sources */,
 				24C5217B20FFAD030018E2D8 /* EmailPasswordLoginViewController.swift in Sources */,
+				DC6F026724CF360B0098A853 /* TVIReplayKitVideoSource.m in Sources */,
 				DCD940B3243B9B7A00D9ECC5 /* ConnectOptionsFactory.swift in Sources */,
 				DCEDB3992475D476006AF70D /* SelectLowRenderDimensionsViewModelFactory.swift in Sources */,
 				DCC7E35B2407081F00431AC3 /* SignInSegueIdentifierFactory.swift in Sources */,

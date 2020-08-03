@@ -16,9 +16,9 @@
 
 #import <Foundation/Foundation.h>
 
-#import "TVIInAppScreenCapturer.h"
+#import "TVIAppScreenSource.h"
 
-@implementation TVIInAppScreenCapturer
+@implementation TVIAppScreenSource
 
 - (nonnull instancetype)initWithOptions:(nullable TVIInAppScreenCapturerOptions *)options {
     self = [super init];

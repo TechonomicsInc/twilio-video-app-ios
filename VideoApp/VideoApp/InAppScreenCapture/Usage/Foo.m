@@ -17,7 +17,7 @@
 #import <Foundation/Foundation.h>
 
 #import "Foo.h"
-#import "TVIInAppScreenCapturer.h"
+#import "TVIAppScreenSource.h"
 
 @import TwilioVideo;
 

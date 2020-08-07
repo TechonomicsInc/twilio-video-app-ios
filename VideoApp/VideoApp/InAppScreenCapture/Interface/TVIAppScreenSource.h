@@ -57,7 +57,7 @@
 
 - (void)appScreenSource:(nonnull TVIAppScreenSource *)source didStartCapture;
 
-- (void)appScreenSource:(nonnull TVIAppScreenSource *)source didFailToStartCaptureWithError:(nonnull NSError *)error;
+- (void)appScreenSource:(nonnull TVIAppScreenSource *)source didFailToStartCaptureWithError:(nonnull NSError *)error; // TVIVideoFormat
 
 - (void)appScreenSource:(nonnull TVIAppScreenSource *)source didFailToStopCaptureWithError:(nonnull NSError *)error;
 

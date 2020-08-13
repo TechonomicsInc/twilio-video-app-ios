@@ -16,26 +16,16 @@
 
 #import <Foundation/Foundation.h>
 
-#import "Foo.h"
-#import "TVIAppScreenSource.h"
+#import "TVIAppScreenSourceOptions.h"
 
-@import TwilioVideo;
+@implementation TVIAppScreenSourceOptionsBuilder
 
-@interface Foo ()
-
-@property (nonatomic, strong) TVIRoom *room; // Assume the roonm is already connected
-@property (nonatomic, strong) TVILocalVideoTrack *track;
-@property (nonatomic, strong) TVIAppScreenSource *source;
-
-@end
-
-@implementation Foo
-
-- (void)shareScreen {
-    self.source = [TVIAppScreenSource new];
-    self.track = [TVILocalVideoTrack trackWithSource:self.source enabled:true name:@"screen"];
-    [self.room.localParticipant publishVideoTrack: self.track];
-    [self.source startCapture];
+- (instancetype)initPrivate {
+    self = [super init];
+    if (self != nil) {
+        // Do init
+    }
+    return self;
 }
 
 @end

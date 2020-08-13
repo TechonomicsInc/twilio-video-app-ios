@@ -133,6 +133,8 @@
 		DC5CC39F249C0F5900355CC6 /* TestSecrets.json in Resources */ = {isa = PBXBuildFile; fileRef = DC9A4C9123D161A200D37CEC /* TestSecrets.json */; };
 		DC5CC3A0249C0F5900355CC6 /* TestSecrets.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC0446A2239716860072F597 /* TestSecrets.swift */; };
 		DC5CC3A1249C0F5900355CC6 /* TestSecretsStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC0446A0239716530072F597 /* TestSecretsStore.swift */; };
+		DC673EF624E45C4700726C48 /* ExampleUsage.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC673EF524E45C4700726C48 /* ExampleUsage.swift */; };
+		DC673EFA24E594F900726C48 /* TVIAppScreenSourceOptions.m in Sources */ = {isa = PBXBuildFile; fileRef = DC673EF924E594F900726C48 /* TVIAppScreenSourceOptions.m */; };
 		DC6F025E24CB91EA0098A853 /* Foo.m in Sources */ = {isa = PBXBuildFile; fileRef = DC6F025D24CB91EA0098A853 /* Foo.m */; };
 		DC6F025F24CB91EA0098A853 /* Foo.m in Sources */ = {isa = PBXBuildFile; fileRef = DC6F025D24CB91EA0098A853 /* Foo.m */; };
 		DC6F026224CF33020098A853 /* TVIAppScreenSource.m in Sources */ = {isa = PBXBuildFile; fileRef = DC6F026124CF33020098A853 /* TVIAppScreenSource.m */; };
@@ -521,6 +523,10 @@
 		DC4E4E2E2357A73900C5D313 /* InternalTwilioAccessTokenStoreSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InternalTwilioAccessTokenStoreSpec.swift; sourceTree = "<group>"; };
 		DC5CC38D249C0EC000355CC6 /* Video-InternalUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Video-InternalUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DC5CC391249C0EC000355CC6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		DC673EF524E45C4700726C48 /* ExampleUsage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExampleUsage.swift; sourceTree = "<group>"; };
+		DC673EF924E594F900726C48 /* TVIAppScreenSourceOptions.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TVIAppScreenSourceOptions.m; sourceTree = "<group>"; };
+		DC673EFB24E5951700726C48 /* TVIAppScreenSourceOptions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TVIAppScreenSourceOptions.h; sourceTree = "<group>"; };
+		DC673EFC24E59F4200726C48 /* TVIScreenCaptureUseCase.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TVIScreenCaptureUseCase.h; sourceTree = "<group>"; };
 		DC6EABBE2357CAC50064E9E0 /* MockAppSettingsStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockAppSettingsStore.swift; sourceTree = "<group>"; };
 		DC6F025C24CB80E50098A853 /* TVIAppScreenSource.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TVIAppScreenSource.h; sourceTree = "<group>"; };
 		DC6F025D24CB91EA0098A853 /* Foo.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Foo.m; sourceTree = "<group>"; };
@@ -1101,6 +1107,7 @@
 			children = (
 				DC6F026024CB922B0098A853 /* Foo.h */,
 				DC6F025D24CB91EA0098A853 /* Foo.m */,
+				DC673EF524E45C4700726C48 /* ExampleUsage.swift */,
 			);
 			path = Usage;
 			sourceTree = "<group>";
@@ -1110,6 +1117,9 @@
 			children = (
 				DC6F025C24CB80E50098A853 /* TVIAppScreenSource.h */,
 				DC6F026124CF33020098A853 /* TVIAppScreenSource.m */,
+				DC673EFB24E5951700726C48 /* TVIAppScreenSourceOptions.h */,
+				DC673EF924E594F900726C48 /* TVIAppScreenSourceOptions.m */,
+				DC673EFC24E59F4200726C48 /* TVIScreenCaptureUseCase.h */,
 				DC6F026424CF35F20098A853 /* TVIReplayKitVideoSource.h */,
 				DC6F026524CF360B0098A853 /* TVIReplayKitVideoSource.m */,
 			);
@@ -2350,6 +2360,7 @@
 				DC44C2BB238704FB00205174 /* RightDetailCell.swift in Sources */,
 				DCD7675B23DF56FE00A2939C /* UserActivityStoreFactory.swift in Sources */,
 				DC82A39124008AFE0081578C /* SelectSDKLogLevelViewModelFactory.swift in Sources */,
+				DC673EF624E45C4700726C48 /* ExampleUsage.swift in Sources */,
 				DCEDB36B24743D1D006AF70D /* BandwidthProfileMode.swift in Sources */,
 				DCEDB31D2464C4CD006AF70D /* TrackName.swift in Sources */,
 				DC82A39524008DCB0081578C /* SDKLogLevelOptionListFactory.swift in Sources */,
@@ -2379,6 +2390,7 @@
 				DCEDB3252464D7EE006AF70D /* RoomFactory.swift in Sources */,
 				DC9A5DCF245B0E6100E4B079 /* LocalParticipant.swift in Sources */,
 				DC9A5E01245CB67600E4B079 /* VideoView.swift in Sources */,
+				DC673EFA24E594F900726C48 /* TVIAppScreenSourceOptions.m in Sources */,
 				DC386DD22458DC05009E994A /* RoomViewModel.swift in Sources */,
 				DCA80B29236B821E009141C9 /* LaunchFlow.swift in Sources */,
 				DC044696238F1FAA0072F597 /* User.swift in Sources */,

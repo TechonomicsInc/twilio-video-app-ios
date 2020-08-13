@@ -16,26 +16,16 @@
 
 #import <Foundation/Foundation.h>
 
-#import "Foo.h"
-#import "TVIAppScreenSource.h"
-
-@import TwilioVideo;
-
-@interface Foo ()
-
-@property (nonatomic, strong) TVIRoom *room; // Assume the roonm is already connected
-@property (nonatomic, strong) TVILocalVideoTrack *track;
-@property (nonatomic, strong) TVIAppScreenSource *source;
-
-@end
-
-@implementation Foo
-
-- (void)shareScreen {
-    self.source = [TVIAppScreenSource new];
-    self.track = [TVILocalVideoTrack trackWithSource:self.source enabled:true name:@"screen"];
-    [self.room.localParticipant publishVideoTrack: self.track];
-    [self.source startCapture];
-}
-
-@end
+/**
+ *  `TVIScreenCaptureUseCase` specifies how `TVIAppScreenSource` should optimize the video format.
+ */
+typedef NS_ENUM(NSUInteger, TVIScreenCaptureUseCase) {
+    /**
+     *  Optimize video format for image sharpness and quality.
+     */
+    TVIScreenCaptureUseCaseScreenshare = 0,
+    /**
+     *  Optimize video format for fluid motion.
+     */
+    TVIScreenCaptureUseCaseVideo
+};

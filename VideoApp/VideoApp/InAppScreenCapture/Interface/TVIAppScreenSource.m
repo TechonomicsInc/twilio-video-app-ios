@@ -20,7 +20,21 @@
 
 @implementation TVIAppScreenSource
 
-- (nonnull instancetype)initWithOptions:(nullable TVIInAppScreenCapturerOptions *)options {
+@synthesize screencast;
+@synthesize sink;
+
+- (instancetype)init {
+    return [self initWithDelegate:nil];
+}
+
+- (instancetype)initWithDelegate:(nullable id<TVIAppScreenSourceDelegate>)delegate {
+//    TVIAppScreenSourceOptionsBuilder *builder = [[TVIAppScreenSourceOptionsBuilder alloc] initPrivate];
+    TVIAppScreenSourceOptions *options; //  = [[TVIAppScreenSourceOptions alloc] initWithBuilder:builder];
+    return [self initWithOptions:options delegate:delegate];
+}
+
+- (instancetype)initWithOptions:(nonnull TVIAppScreenSourceOptions *)options
+                               delegate:(nullable id<TVIAppScreenSourceDelegate>)delegate {
     self = [super init];
     if (self) {
         // Do init
@@ -32,9 +46,25 @@
     
 }
 
-- (void)stopCapture {
-
+- (void)startCaptureWithCompletion:(nullable TVIAppScreenSourceStartedBlock)completion {
+    
 }
 
+- (void)startCaptureWithFormat:(nonnull TVIVideoFormat *)format
+                    completion:(nullable TVIAppScreenSourceStartedBlock)completion {
+    
+}
+
+- (void)stopCapture {
+    
+}
+
+- (void)stopCaptureWithCompletion:(nullable TVIAppScreenSourceStoppedBlock)completion {
+    
+}
+
+- (void)requestOutputFormat:(nonnull TVIVideoFormat *)outputFormat {
+
+}
 
 @end

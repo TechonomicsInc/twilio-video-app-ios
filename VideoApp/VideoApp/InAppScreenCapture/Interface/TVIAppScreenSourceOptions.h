@@ -14,7 +14,7 @@
 //  limitations under the License.
 //
 
-#import "TVIScreenCaptureUseCase.h"
+#import "TVIScreenContent.h"
 
 /**
  *  `TVIAppScreenSourceOptionsBuilder` is a builder class for `TVIAppScreenSourceOptions`.
@@ -24,9 +24,9 @@
 /**
  *  @brief How `TVIAppScreenSource` should optimize the video format.
  *
- *  @see TVIScreenCaptureUseCase
+ *  @see TVIScreenContent
  */
-@property (nonatomic, assign) TVIScreenCaptureUseCase useCase;
+@property (nonatomic, assign) TVIScreenContent screenContent;
 
 /**
  *  @brief You should not initialize `TVIAppScreenSourceOptionsBuilder` directly, use a `TVIAppScreenSourceOptionsBuilderBlock` instead.
@@ -48,11 +48,11 @@ typedef void (^TVIAppScreenSourceOptionsBuilderBlock)(TVIAppScreenSourceOptionsB
 @interface TVIAppScreenSourceOptions : NSObject
 
 /**
- *  @brief How `TVIAppScreenSource` should optimize the video format. Defaults to `TVIScreenCaptureUseCaseScreenshare`.
+ *  @brief How `TVIAppScreenSource` should optimize the video format. Defaults to `TVIScreenContentDefault`.
  *
- *  @see TVIScreenCaptureUseCase
+ *  @see TVIScreenContent
  */
-@property (nonatomic, assign, readonly) TVIScreenCaptureUseCase useCase;
+@property (nonatomic, assign, readonly) TVIScreenContent screenContent;
 
 /**
  *  @brief Developers shouldn't initialize this class directly.

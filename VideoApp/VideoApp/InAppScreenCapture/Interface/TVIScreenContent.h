@@ -17,15 +17,15 @@
 #import <Foundation/Foundation.h>
 
 /**
- *  `TVIScreenCaptureUseCase` specifies how `TVIAppScreenSource` should optimize the video format.
+ *  `TVIScreenContent` specifies how `TVIAppScreenSource` should optimize the video format.
  */
-typedef NS_ENUM(NSUInteger, TVIScreenCaptureUseCase) {
+typedef NS_ENUM(NSUInteger, TVIScreenContent) {
     /**
      *  Optimize video format for image sharpness and quality.
      */
-    TVIScreenCaptureUseCaseScreenshare = 0,
+    TVIScreenContentDefault = 0,
     /**
      *  Optimize video format for fluid motion.
      */
-    TVIScreenCaptureUseCaseVideo
+    TVIScreenContentVideo
 };

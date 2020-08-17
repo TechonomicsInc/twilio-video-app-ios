@@ -526,7 +526,7 @@
 		DC673EF524E45C4700726C48 /* ExampleUsage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExampleUsage.swift; sourceTree = "<group>"; };
 		DC673EF924E594F900726C48 /* TVIAppScreenSourceOptions.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TVIAppScreenSourceOptions.m; sourceTree = "<group>"; };
 		DC673EFB24E5951700726C48 /* TVIAppScreenSourceOptions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TVIAppScreenSourceOptions.h; sourceTree = "<group>"; };
-		DC673EFC24E59F4200726C48 /* TVIScreenCaptureUseCase.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TVIScreenCaptureUseCase.h; sourceTree = "<group>"; };
+		DC673EFC24E59F4200726C48 /* TVIScreenContent.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TVIScreenContent.h; sourceTree = "<group>"; };
 		DC6EABBE2357CAC50064E9E0 /* MockAppSettingsStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockAppSettingsStore.swift; sourceTree = "<group>"; };
 		DC6F025C24CB80E50098A853 /* TVIAppScreenSource.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TVIAppScreenSource.h; sourceTree = "<group>"; };
 		DC6F025D24CB91EA0098A853 /* Foo.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Foo.m; sourceTree = "<group>"; };
@@ -1119,7 +1119,7 @@
 				DC6F026124CF33020098A853 /* TVIAppScreenSource.m */,
 				DC673EFB24E5951700726C48 /* TVIAppScreenSourceOptions.h */,
 				DC673EF924E594F900726C48 /* TVIAppScreenSourceOptions.m */,
-				DC673EFC24E59F4200726C48 /* TVIScreenCaptureUseCase.h */,
+				DC673EFC24E59F4200726C48 /* TVIScreenContent.h */,
 				DC6F026424CF35F20098A853 /* TVIReplayKitVideoSource.h */,
 				DC6F026524CF360B0098A853 /* TVIReplayKitVideoSource.m */,
 			);

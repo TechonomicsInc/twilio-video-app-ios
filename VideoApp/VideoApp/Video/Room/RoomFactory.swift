@@ -21,6 +21,7 @@ class RoomFactory {
         let localParticipant = LocalParticipant(
             identity: UserStoreFactory().makeUserStore().user.displayName,
             micTrackFactory: MicTrackFactory(),
+            appScreenManagerFactory: AppScreenManagerFactory(),
             cameraManagerFactory: CameraManagerFactory()
         )
         return Room(

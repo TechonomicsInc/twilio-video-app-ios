@@ -46,6 +46,10 @@ class RoomViewModel {
         get { room.localParticipant.isCameraOn }
         set { room.localParticipant.isCameraOn = newValue }
     }
+    var isSharingScreen: Bool {
+        get { room.localParticipant.isSharingAppScreen }
+        set { room.localParticipant.isSharingAppScreen = newValue }
+    }
     var cameraPosition: AVCaptureDevice.Position {
         get { room.localParticipant.cameraPosition }
         set { room.localParticipant.cameraPosition = newValue }

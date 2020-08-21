@@ -69,7 +69,8 @@ class RoomViewController: UIViewController {
     }
     
     @IBAction func switchCameraButtonTapped(_ sender: Any) {
-        viewModel.cameraPosition = viewModel.cameraPosition == .front ? .back : .front
+        viewModel.isSharingScreen.toggle() // Fix UI
+//        viewModel.cameraPosition = viewModel.cameraPosition == .front ? .back : .front
     }
     
     private func updateView() {

@@ -139,6 +139,16 @@
 		DC6F026324CF33020098A853 /* TVIAppScreenSource.m in Sources */ = {isa = PBXBuildFile; fileRef = DC6F026124CF33020098A853 /* TVIAppScreenSource.m */; };
 		DC76FD0224105500001B2FFC /* EnvironmentVariableStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC76FD00241054FC001B2FFC /* EnvironmentVariableStore.swift */; };
 		DC76FD0324105501001B2FFC /* EnvironmentVariableStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC76FD00241054FC001B2FFC /* EnvironmentVariableStore.swift */; };
+		DC7E08FE24F053D4009F9603 /* AppScreenManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC7E08FD24F053D4009F9603 /* AppScreenManager.swift */; };
+		DC7E08FF24F053D4009F9603 /* AppScreenManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC7E08FD24F053D4009F9603 /* AppScreenManager.swift */; };
+		DC7E090124F05740009F9603 /* AppScreenManagerFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC7E090024F05740009F9603 /* AppScreenManagerFactory.swift */; };
+		DC7E090224F05740009F9603 /* AppScreenManagerFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC7E090024F05740009F9603 /* AppScreenManagerFactory.swift */; };
+		DC7E090424F05FB1009F9603 /* ReplayKitVideoSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC7E090324F05FB1009F9603 /* ReplayKitVideoSource.swift */; };
+		DC7E090524F05FB1009F9603 /* ReplayKitVideoSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC7E090324F05FB1009F9603 /* ReplayKitVideoSource.swift */; };
+		DC7E090724F05FBC009F9603 /* Telecine.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC7E090624F05FBC009F9603 /* Telecine.swift */; };
+		DC7E090824F05FBC009F9603 /* Telecine.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC7E090624F05FBC009F9603 /* Telecine.swift */; };
+		DC7E090B24F061FB009F9603 /* ExampleCoreAudioDeviceGetCurrentQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = DC7E090A24F061FB009F9603 /* ExampleCoreAudioDeviceGetCurrentQueue.m */; };
+		DC7E090C24F061FB009F9603 /* ExampleCoreAudioDeviceGetCurrentQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = DC7E090A24F061FB009F9603 /* ExampleCoreAudioDeviceGetCurrentQueue.m */; };
 		DC82A35023FC9AAA0081578C /* JSONContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC82A34E23FC9AAA0081578C /* JSONContainer.swift */; };
 		DC82A35123FC9AAA0081578C /* JSONContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC82A34E23FC9AAA0081578C /* JSONContainer.swift */; };
 		DC82A35423FDB6890081578C /* SDKLogLevel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC82A35223FDB6890081578C /* SDKLogLevel.swift */; };
@@ -531,6 +541,12 @@
 		DC78CABB243547CB006D3FAA /* RoomActivities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomActivities.swift; sourceTree = "<group>"; };
 		DC78CABD24354F8F006D3FAA /* SignedInTestCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignedInTestCase.swift; sourceTree = "<group>"; };
 		DC78CAC62436768F006D3FAA /* Unit.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = Unit.xctestplan; sourceTree = "<group>"; };
+		DC7E08FD24F053D4009F9603 /* AppScreenManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppScreenManager.swift; sourceTree = "<group>"; };
+		DC7E090024F05740009F9603 /* AppScreenManagerFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppScreenManagerFactory.swift; sourceTree = "<group>"; };
+		DC7E090324F05FB1009F9603 /* ReplayKitVideoSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReplayKitVideoSource.swift; sourceTree = "<group>"; };
+		DC7E090624F05FBC009F9603 /* Telecine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Telecine.swift; sourceTree = "<group>"; };
+		DC7E090924F061C9009F9603 /* ExampleCoreAudioDeviceGetCurrentQueue.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ExampleCoreAudioDeviceGetCurrentQueue.h; sourceTree = "<group>"; };
+		DC7E090A24F061FB009F9603 /* ExampleCoreAudioDeviceGetCurrentQueue.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ExampleCoreAudioDeviceGetCurrentQueue.m; sourceTree = "<group>"; };
 		DC82A34E23FC9AAA0081578C /* JSONContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONContainer.swift; sourceTree = "<group>"; };
 		DC82A35223FDB6890081578C /* SDKLogLevel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SDKLogLevel.swift; sourceTree = "<group>"; };
 		DC82A35B23FDB9420081578C /* SDKLogLevelSettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SDKLogLevelSettingsViewModel.swift; sourceTree = "<group>"; };
@@ -1094,6 +1110,10 @@
 				DC673EFB24E5951700726C48 /* TVIAppScreenSourceOptions.h */,
 				DC673EF924E594F900726C48 /* TVIAppScreenSourceOptions.m */,
 				DC673EFC24E59F4200726C48 /* TVIScreenContent.h */,
+				DC7E090324F05FB1009F9603 /* ReplayKitVideoSource.swift */,
+				DC7E090624F05FBC009F9603 /* Telecine.swift */,
+				DC7E090924F061C9009F9603 /* ExampleCoreAudioDeviceGetCurrentQueue.h */,
+				DC7E090A24F061FB009F9603 /* ExampleCoreAudioDeviceGetCurrentQueue.m */,
 			);
 			path = AppScreenSource;
 			sourceTree = "<group>";
@@ -1140,6 +1160,15 @@
 				DC78CAC62436768F006D3FAA /* Unit.xctestplan */,
 			);
 			path = Plans;
+			sourceTree = "<group>";
+		};
+		DC7E08FC24F05397009F9603 /* AppScreen */ = {
+			isa = PBXGroup;
+			children = (
+				DC7E08FD24F053D4009F9603 /* AppScreenManager.swift */,
+				DC7E090024F05740009F9603 /* AppScreenManagerFactory.swift */,
+			);
+			path = AppScreen;
 			sourceTree = "<group>";
 		};
 		DC82A35A23FDB8F80081578C /* SDKLogLevel */ = {
@@ -1518,6 +1547,7 @@
 				DCEDB31A2464C4B9006AF70D /* Core */,
 				DC9A5E31246215C200E4B079 /* Mic */,
 				DC9A5E30246215A700E4B079 /* Camera */,
+				DC7E08FC24F05397009F9603 /* AppScreen */,
 			);
 			path = Tracks;
 			sourceTree = "<group>";
@@ -2251,6 +2281,7 @@
 				DC85CA6223CE4FCA00BF016F /* AppCenterStoreFactory.swift in Sources */,
 				DCC7E3562406ED3900431AC3 /* UserDefaultsProtocol.swift in Sources */,
 				DCEDB3212464CF90006AF70D /* RoomState.swift in Sources */,
+				DC7E08FE24F053D4009F9603 /* AppScreenManager.swift in Sources */,
 				DC44C2CA2387118400205174 /* UITableViewCellHelpers.swift in Sources */,
 				DC39248A2416A1D80068E33F /* SelectEnvironmentViewModelFactory.swift in Sources */,
 				DC9A5E442463247700E4B079 /* CircleButton.swift in Sources */,
@@ -2274,6 +2305,7 @@
 				DC4E4E2423577EE500C5D313 /* Topology.swift in Sources */,
 				DC0446D023A2F01A0072F597 /* DeveloperSettingsViewControllerFactory.swift in Sources */,
 				DC0446CC23A2EE340072F597 /* DeveloperSettingsViewModel.swift in Sources */,
+				DC7E090724F05FBC009F9603 /* Telecine.swift in Sources */,
 				DCD7675723DF554A00A2939C /* UserActivityStore.swift in Sources */,
 				DCEDB3292464EB0B006AF70D /* RoomViewModelFactory.swift in Sources */,
 				DCAEBF312383560500141D2D /* EditTextCell.swift in Sources */,
@@ -2302,6 +2334,7 @@
 				DCF4615623859BB800DD8FEA /* AppInfoStore.swift in Sources */,
 				DCEDB35E24733641006AF70D /* LoginViewController.swift in Sources */,
 				DCA53955235F89BE00CA26FB /* CommunityAuthStore.swift in Sources */,
+				DC7E090124F05740009F9603 /* AppScreenManagerFactory.swift in Sources */,
 				DCAEBF382383581F00141D2D /* EditTextViewController.swift in Sources */,
 				243CDB4B22665F1800637B6B /* TwilioColors.swift in Sources */,
 				DC3924912416A8070068E33F /* APIErrorResponseDecoder.swift in Sources */,
@@ -2380,9 +2413,11 @@
 				DC9A5E0E245F611D00E4B079 /* MainParticipantStore.swift in Sources */,
 				DCC7E37724085BE200431AC3 /* APIErrorResponse.swift in Sources */,
 				DCEC3CF92385F8CA00EBDEBF /* EditTextViewModel.swift in Sources */,
+				DC7E090424F05FB1009F9603 /* ReplayKitVideoSource.swift in Sources */,
 				DC9A5DE3245CA2E000E4B079 /* NibView.swift in Sources */,
 				DC82A35423FDB6890081578C /* SDKLogLevel.swift in Sources */,
 				DC8EAE4423BA96C00045018F /* URLOpenerFactory.swift in Sources */,
+				DC7E090B24F061FB009F9603 /* ExampleCoreAudioDeviceGetCurrentQueue.m in Sources */,
 				DC8AA8D02367A10E006C06D5 /* TestAppDelegate.swift in Sources */,
 				DCF461662385B17A00DD8FEA /* AdvancedSettingsViewControllerFactory.swift in Sources */,
 				DC1C2F8723A6E7050044FB4D /* DispatchQueueProtocol.swift in Sources */,
@@ -2442,6 +2477,7 @@
 				DC1C2F8C23A6E7270044FB4D /* NotificationCenterProtocol.swift in Sources */,
 				DCEDB353246F16E2006AF70D /* RemoteVideoTrack.swift in Sources */,
 				DC9A5DD4245B332D00E4B079 /* RemoteParticipant.swift in Sources */,
+				DC7E090224F05740009F9603 /* AppScreenManagerFactory.swift in Sources */,
 				DC8EAE3523BA71990045018F /* LaunchStoresFactory.swift in Sources */,
 				DCEDB3322464F9BA006AF70D /* IndexSetHelpers.swift in Sources */,
 				DC44C2EC23876B4700205174 /* EditTextSegueSender.swift in Sources */,
@@ -2494,11 +2530,13 @@
 				DCEDB3A12476C531006AF70D /* SelectHighRenderDimensionsViewModelFactory.swift in Sources */,
 				DCF4615B2385A51700DD8FEA /* SettingsViewController.swift in Sources */,
 				DCB7C1872405BD68009DEA70 /* API.swift in Sources */,
+				DC7E090824F05FBC009F9603 /* Telecine.swift in Sources */,
 				DC2511B5248921CD00C776D6 /* ParticipantDelegate.swift in Sources */,
 				4B0012661FBA52E5004A587E /* TrackStatsTableViewCell.m in Sources */,
 				DCAEBF3D2384448500141D2D /* SelectOptionViewController.swift in Sources */,
 				DCEDB380247447D3006AF70D /* SelectTrackSwitchOffModeViewModelFactory.swift in Sources */,
 				DC4E4E2123577EA700C5D313 /* AppSettingsStore.swift in Sources */,
+				DC7E08FF24F053D4009F9603 /* AppScreenManager.swift in Sources */,
 				DCEDB37C24744734006AF70D /* TrackSwitchOffMode.swift in Sources */,
 				DCEDB374247442D9006AF70D /* TrackPriority.swift in Sources */,
 				DC44C2E823876AFB00205174 /* SelectOptionSegueSender.swift in Sources */,
@@ -2516,6 +2554,7 @@
 				DCEDB36C24743D1D006AF70D /* BandwidthProfileMode.swift in Sources */,
 				DCEDB31E2464C4CD006AF70D /* TrackName.swift in Sources */,
 				DC82A39624008DCB0081578C /* SDKLogLevelOptionListFactory.swift in Sources */,
+				DC7E090524F05FB1009F9603 /* ReplayKitVideoSource.swift in Sources */,
 				DC82A39A2404950B0081578C /* PasscodeSignInViewController.swift in Sources */,
 				4B0012691FBA52E5004A587E /* StatsUIModel.m in Sources */,
 				DC8EAE4E23BA9F5E0045018F /* WindowSceneObserverFactory.swift in Sources */,
@@ -2561,6 +2600,7 @@
 				DCC7E36324082EB300431AC3 /* AuthError.swift in Sources */,
 				DCAEBF1E2383342C00141D2D /* DestructiveButtonCell.swift in Sources */,
 				DC9A5E3D2463161400E4B079 /* CircleView.swift in Sources */,
+				DC7E090C24F061FB009F9603 /* ExampleCoreAudioDeviceGetCurrentQueue.m in Sources */,
 				DC9A5E412463239E00E4B079 /* ToggleButton.swift in Sources */,
 				DCEDB34F246F16C6006AF70D /* VideoSource.swift in Sources */,
 				DCEDB32E2464F815006AF70D /* UICollectionViewHelpers.swift in Sources */,

@@ -72,6 +72,31 @@ class LocalParticipant: NSObject, Participant {
             sendUpdate()
         }
     }
+    var isSharingAppScreen: Bool {
+        get {
+            appScreenManager?.track.isEnabled ?? false // Think about this more
+        }
+        set {
+            if newValue {
+                guard
+                    appScreenManager == nil,
+                    let appScreenManager = appScreenManagerFactory.makeAppScreenManager()
+                    else {
+                        return
+                }
+                
+                self.appScreenManager = appScreenManager
+                appScreenManager.startCapture()
+                participant?.publishCameraTrack(appScreenManager.track.track) // Rename publishCameraTrack
+            } else {
+                guard let appScreenManager = appScreenManager else { return }
+                
+                participant?.unpublishVideoTrack(appScreenManager.track.track)
+                appScreenManager.stopCapture()
+                self.appScreenManager = nil
+            }
+        }
+    }
     var participant: TwilioVideo.LocalParticipant? {
         didSet {
             guard let participant = participant else { return }
@@ -106,12 +131,20 @@ class LocalParticipant: NSObject, Participant {
     weak var delegate: ParticipantDelegate?
     private(set) var micTrack: LocalAudioTrack?
     private let micTrackFactory: MicTrackFactory
+    private let appScreenManagerFactory: AppScreenManagerFactory
     private let cameraManagerFactory: CameraManagerFactory
+    private var appScreenManager: AppScreenManager?
     private var cameraManager: CameraManager?
 
-    init(identity: String, micTrackFactory: MicTrackFactory, cameraManagerFactory: CameraManagerFactory) {
+    init(
+        identity: String,
+        micTrackFactory: MicTrackFactory,
+        appScreenManagerFactory: AppScreenManagerFactory,
+        cameraManagerFactory: CameraManagerFactory
+    ) {
         self.identity = identity
         self.micTrackFactory = micTrackFactory
+        self.appScreenManagerFactory = appScreenManagerFactory
         self.cameraManagerFactory = cameraManagerFactory
     }
     

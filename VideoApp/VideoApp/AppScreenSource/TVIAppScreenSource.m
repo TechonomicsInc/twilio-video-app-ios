@@ -15,8 +15,17 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <ReplayKit/ReplayKit.h>
 
+#import "VideoApp-Swift.h"
 #import "TVIAppScreenSource.h"
+
+@interface TVIAppScreenSource()
+
+@property (nonatomic, strong) RPScreenRecorder *screenRecorder;
+@property (nonatomic, strong) ReplayKitVideoSource *source;
+
+@end
 
 @implementation TVIAppScreenSource
 
@@ -36,14 +45,41 @@
 - (instancetype)initWithOptions:(nonnull TVIAppScreenSourceOptions *)options
                                delegate:(nullable id<TVIAppScreenSourceDelegate>)delegate {
     self = [super init];
+    
     if (self) {
-        // Do init
+        _delegate = delegate;
+        _screenRecorder = [RPScreenRecorder sharedRecorder];
+        _source = [ReplayKitVideoSource new];
+        screencast = YES;
     }
+    
     return self;
 }
 
+- (BOOL)isAvailable
+{
+    return self.screenRecorder.isAvailable;
+}
+
 - (void)startCapture {
+    self.screenRecorder.microphoneEnabled = NO;
+    self.screenRecorder.cameraEnabled = NO;
     
+    // Prevent retain cycles
+    [self.screenRecorder startCaptureWithHandler:^(CMSampleBufferRef sampleBuffer, RPSampleBufferType bufferType, NSError *error) {
+        // Handle error
+        
+        switch (bufferType) {
+            case RPSampleBufferTypeVideo:
+                self.source.sink = self.sink; // Fix this
+                [self.source processFrameWithSampleBuffer:sampleBuffer];
+                break;
+            default:
+                break;
+        }
+    } completionHandler:^(NSError *error) {
+        // Handle error
+    }];
 }
 
 - (void)startCaptureWithCompletion:(nullable TVIAppScreenSourceStartedBlock)completion {
@@ -56,7 +92,9 @@
 }
 
 - (void)stopCapture {
-    
+    [self.screenRecorder stopCaptureWithHandler:^(NSError *error) {
+        // Handle error
+    }];
 }
 
 - (void)stopCaptureWithCompletion:(nullable TVIAppScreenSourceStoppedBlock)completion {

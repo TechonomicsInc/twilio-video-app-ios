@@ -14,16 +14,17 @@
 //  limitations under the License.
 //
 
-#import <Foundation/Foundation.h>
+#import <CoreMedia/CoreMedia.h>
 #import <ReplayKit/ReplayKit.h>
 
-#import "VideoApp-Swift.h"
+#import "ReplayKitSampleHandler.h"
 #import "TVIAppScreenSource.h"
+#import "VideoApp-Swift.h"
 
 @interface TVIAppScreenSource()
 
 @property (nonatomic, strong) RPScreenRecorder *screenRecorder;
-@property (nonatomic, strong) ReplayKitVideoSource *source;
+@property (nonatomic, strong) ReplayKitSampleHandler *sampleHandler;
 
 @end
 
@@ -49,7 +50,7 @@
     if (self) {
         _delegate = delegate;
         _screenRecorder = [RPScreenRecorder sharedRecorder];
-        _source = [ReplayKitVideoSource new];
+        _sampleHandler = [ReplayKitSampleHandler new];
         screencast = YES;
     }
     
@@ -67,16 +68,17 @@
     
     // Prevent retain cycles
     [self.screenRecorder startCaptureWithHandler:^(CMSampleBufferRef sampleBuffer, RPSampleBufferType bufferType, NSError *error) {
-        // Handle error
-        
-        switch (bufferType) {
-            case RPSampleBufferTypeVideo:
-                self.source.sink = self.sink; // Fix this
-                [self.source processFrameWithSampleBuffer:sampleBuffer];
-                break;
-            default:
-                break;
+        if (error != nil) {
+            // Handle error
+            
+            return;
         }
+        
+        if (self.sink == nil) {
+            return;
+        }
+
+        [self.sampleHandler handleSample:sampleBuffer bufferType:bufferType sink:self.sink];
     } completionHandler:^(NSError *error) {
         // Handle error
     }];

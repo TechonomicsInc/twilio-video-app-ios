@@ -16,14 +16,49 @@
 
 #import "VideoFrameTransmitter.h"
 
+@interface VideoFrameTransmitter()
+
+@property (nonatomic, retain) TVIVideoFrame *lastVideoFrame;
+@property (nonatomic, assign) CMTime lastTimestamp;
+@property (nonatomic, strong) dispatch_queue_t queue; // Strong?
+@property (nonatomic, strong) dispatch_source_t timer; // Strong?
+
+@end
+
 @implementation VideoFrameTransmitter
+
+- (instancetype)init {
+    self = [super init];
+    
+    if (self) {
+        _queue = dispatch_queue_create("com.twilio.video.source.screen", DISPATCH_QUEUE_SERIAL); // More unique?
+        dispatch_set_target_queue(_queue, dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0)); // Correct QOS?
+        _timer = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0, _queue);
+    }
+    
+    return self;
+}
 
 - (void)transmitVideoFrame:(TVIVideoFrame *)videoFrame
             repeatInterval:(CMTime)repeatInterval
                       sink:(id<TVIVideoSink>)sink {
     [sink onVideoFrame:videoFrame];
+    self.lastVideoFrame = videoFrame;
+    self.lastTimestamp = CMClockGetTime(CMClockGetHostTimeClock());
     
-    // Repeat
+    dispatch_source_cancel(self.timer);
+    
+    dispatch_source_set_timer(self.timer, DISPATCH_TIME_NOW, <#uint64_t interval#>, 20);
+    
+    
+
+
+
+
+
+
+
+    dispatch_resume(self.timer);
 }
 
 @end

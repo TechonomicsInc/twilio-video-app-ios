@@ -15,9 +15,10 @@
 //
 
 import IGListDiffKit
+import SafariServices
 import UIKit
 
-class RoomViewController: UIViewController {
+class RoomViewController: UIViewController, SFSafariViewControllerDelegate {
     @IBOutlet weak var disableMicButton: CircleToggleButton!
     @IBOutlet weak var disableCameraButton:  CircleToggleButton!
     @IBOutlet weak var leaveButton: UIButton!
@@ -39,6 +40,15 @@ class RoomViewController: UIViewController {
 
         disableMicButton.didToggle = { [weak self] in self?.viewModel.isMicOn = !$0 }
         disableCameraButton.didToggle = { [weak self] in
+            let viewController = SFSafariViewController(url: URL(string: "https://www.apple.com")!)
+            viewController.delegate = self
+            
+//            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+//            let viewController = storyboard.instantiateViewController(withIdentifier: "splashScreen")
+//            viewController.modalPresentationStyle = .fullScreen
+
+            self?.present(viewController, animated: true)
+            
             self?.viewModel.isCameraOn = !$0
             self?.updateView()
         }
@@ -49,6 +59,10 @@ class RoomViewController: UIViewController {
         statsViewController.addAsSwipeableView(toParentViewController: self)
 
         updateView()
+    }
+
+    func safariViewControllerDidFinish(_ controller: SFSafariViewController) {
+        dismiss(animated: true)
     }
     
     override func viewWillAppear(_ animated: Bool) {

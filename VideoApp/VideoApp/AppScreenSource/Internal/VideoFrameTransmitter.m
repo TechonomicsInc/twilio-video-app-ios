@@ -21,7 +21,8 @@
 @property (nonatomic, retain) TVIVideoFrame *lastVideoFrame;
 @property (nonatomic, assign) CMTime lastTimestamp;
 @property (nonatomic, strong) dispatch_queue_t queue; // Strong?
-@property (nonatomic, strong) dispatch_source_t timer; // Strong?
+@property (nonatomic, retain) CADisplayLink *displayLink;
+@property (nonatomic, retain) id<TVIVideoSink> sink;
 
 @end
 
@@ -33,32 +34,46 @@
     if (self) {
         _queue = dispatch_queue_create("com.twilio.video.source.screen", DISPATCH_QUEUE_SERIAL); // More unique?
         dispatch_set_target_queue(_queue, dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0)); // Correct QOS?
-        _timer = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0, _queue);
     }
     
     return self;
 }
 
 - (void)transmitVideoFrame:(TVIVideoFrame *)videoFrame
-            repeatInterval:(CMTime)repeatInterval
+            repeatInterval:(CMTime)repeatInterval // Change
                       sink:(id<TVIVideoSink>)sink {
+    NSLog(@"TCR new frame");
+    [self startTimer];
+    self.sink = sink;
+    
     [sink onVideoFrame:videoFrame];
     self.lastVideoFrame = videoFrame;
     self.lastTimestamp = CMClockGetTime(CMClockGetHostTimeClock());
+}
+
+- (void)startTimer {
+    if (self.displayLink != nil) {
+        return;
+    }
     
-    dispatch_source_cancel(self.timer);
+    self.displayLink = [CADisplayLink displayLinkWithTarget:self selector:@selector(timer:)];
+    self.displayLink.preferredFramesPerSecond = 10;
+    [self.displayLink addToRunLoop:[NSRunLoop mainRunLoop] forMode:NSRunLoopCommonModes]; // Remove from run loop
+}
+
+- (void)timer:(CADisplayLink *)sender {
+    CMTime currentTime = CMClockGetTime(CMClockGetHostTimeClock());
+    CMTime delta = CMTimeSubtract(currentTime, self.lastTimestamp);
+    CMTime maxInterval = CMTimeMake(100, 1000);
     
-    dispatch_source_set_timer(self.timer, DISPATCH_TIME_NOW, <#uint64_t interval#>, 20);
-    
-    
-
-
-
-
-
-
-
-    dispatch_resume(self.timer);
+    if (CMTimeCompare(delta, maxInterval) >= 0) {
+//        NSLog(@"TCR resend frame");
+        TVIVideoFrame *newFrame = [[TVIVideoFrame alloc] initWithTimestamp:currentTime
+                                                                    buffer:self.lastVideoFrame.imageBuffer
+                                                               orientation:self.lastVideoFrame.orientation];
+        
+        [self.sink onVideoFrame:newFrame];
+    }
 }
 
 @end

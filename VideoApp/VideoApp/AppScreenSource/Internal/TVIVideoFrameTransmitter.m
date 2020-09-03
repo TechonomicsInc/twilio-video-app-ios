@@ -14,9 +14,9 @@
 //  limitations under the License.
 //
 
-#import "VideoFrameTransmitter.h"
+#import "TVIVideoFrameTransmitter.h"
 
-@interface VideoFrameTransmitter()
+@interface TVIVideoFrameTransmitter()
 
 @property (nonatomic, retain) TVIVideoFrame *lastVideoFrame;
 //@property (nonatomic, strong) dispatch_queue_t queue; // Strong?
@@ -25,7 +25,7 @@
 
 @end
 
-@implementation VideoFrameTransmitter
+@implementation TVIVideoFrameTransmitter
 
 - (instancetype)init {
     self = [super init];

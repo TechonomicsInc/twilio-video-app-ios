@@ -16,7 +16,7 @@
 
 #import <Foundation/Foundation.h>
 
-#import "TVIAppScreenSourceOptions.h"
+#import "TVIAppScreenSourceOptions+Internal.h"
 
 @implementation TVIAppScreenSourceOptionsBuilder
 
@@ -26,6 +26,31 @@
         // Do init
     }
     return self;
+}
+
+@end
+
+@implementation TVIAppScreenSourceOptions
+
+- (instancetype)initWithBuilder:(TVIAppScreenSourceOptionsBuilder *)builder {
+    self = [super init];
+    if (self) {
+        // Do init
+    }
+    return self;
+}
+
++ (instancetype)optionsWithBlock:(TVIAppScreenSourceOptionsBuilderBlock)builderBlock {
+    if (builderBlock == nil) {
+        NSException *exception = [NSException exceptionWithName:NSInvalidArgumentException
+                                                         reason:@"A builder block is required."
+                                                       userInfo:nil];
+        [exception raise];
+    }
+
+    TVIAppScreenSourceOptionsBuilder *builder = [[TVIAppScreenSourceOptionsBuilder alloc] initPrivate];
+    builderBlock(builder);
+    return [[TVIAppScreenSourceOptions alloc] initWithBuilder:builder];
 }
 
 @end

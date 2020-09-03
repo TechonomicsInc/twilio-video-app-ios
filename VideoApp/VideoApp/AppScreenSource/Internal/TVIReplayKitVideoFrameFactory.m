@@ -14,13 +14,12 @@
 //  limitations under the License.
 //
 
-#import <CoreFoundation/CoreFoundation.h>
 #import <CoreVideo/CoreVideo.h>
 #import <ReplayKit/ReplayKit.h>
 
-#import "ReplayKitVideoFrameFactory.h"
+#import "TVIReplayKitVideoFrameFactory.h"
 
-@implementation ReplayKitVideoFrameFactory
+@implementation TVIReplayKitVideoFrameFactory
 
 - (TVIVideoFrame *)makeVideoFrameWithSample:(CMSampleBufferRef)sampleBuffer
                                   timestamp:(CMTime)timestamp {

@@ -14,15 +14,16 @@
 //  limitations under the License.
 //
 
-#import <Foundation/Foundation.h>
+#import <CoreMedia/CoreMedia.h>
 
 @import TwilioVideo;
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface VideoFrameTransmitter : NSObject
+@interface TVIReplayKitVideoFrameFactory : NSObject
 
-- (void)transmitVideoFrame:(TVIVideoFrame *)videoFrame sink:(id<TVIVideoSink>)sink;
+- (TVIVideoFrame *)makeVideoFrameWithSample:(CMSampleBufferRef)sampleBuffer
+                                  timestamp:(CMTime)timestamp;
 
 @end
 

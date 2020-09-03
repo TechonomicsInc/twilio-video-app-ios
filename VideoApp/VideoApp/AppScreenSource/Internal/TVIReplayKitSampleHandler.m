@@ -14,28 +14,26 @@
 //  limitations under the License.
 //
 
-#import <CoreMedia/CoreMedia.h>
+#import "TVIReplayKitSampleHandler.h"
+#import "TVIReplayKitVideoFrameFactory.h"
+#import "TVIVideoFrameTransmitter.h"
 
-#import "ReplayKitSampleHandler.h"
-#import "ReplayKitVideoFrameFactory.h"
-#import "VideoFrameTransmitter.h"
-
-@interface ReplayKitSampleHandler()
+@interface TVIReplayKitSampleHandler()
 
 @property (nonatomic, assign) CMSampleBufferRef lastSampleBuffer;
-@property (nonatomic, retain) ReplayKitVideoFrameFactory *videoFrameFactory;
-@property (nonatomic, retain) VideoFrameTransmitter *transmitter;
+@property (nonatomic, retain) TVIReplayKitVideoFrameFactory *videoFrameFactory;
+@property (nonatomic, retain) TVIVideoFrameTransmitter *transmitter;
 
 @end
 
-@implementation ReplayKitSampleHandler
+@implementation TVIReplayKitSampleHandler
 
 - (instancetype)init {
     self = [super init];
     
     if (self) {
-        _videoFrameFactory = [ReplayKitVideoFrameFactory new];
-        _transmitter = [VideoFrameTransmitter new];
+        _videoFrameFactory = [TVIReplayKitVideoFrameFactory new];
+        _transmitter = [TVIVideoFrameTransmitter new];
     }
     
     return self;

@@ -14,18 +14,16 @@
 //  limitations under the License.
 //
 
-#import <ReplayKit/ReplayKit.h>
+#import "TVIAppScreenSourceOptions.h"
 
-@import TwilioVideo;
+@interface TVIAppScreenSourceOptionsBuilder (Internal)
 
-NS_ASSUME_NONNULL_BEGIN
-
-@interface ReplayKitSampleHandler : NSObject
-
-- (void)handleSample:(CMSampleBufferRef)sampleBuffer
-          bufferType:(RPSampleBufferType)bufferType
-                sink:(id<TVIVideoSink>)sink;
+- (nonnull instancetype)initPrivate;
 
 @end
 
-NS_ASSUME_NONNULL_END
+@interface TVIAppScreenSourceOptions (Internal)
+
+- (nonnull instancetype)initWithBuilder:(nonnull TVIAppScreenSourceOptionsBuilder *)builder;
+
+@end

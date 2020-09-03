@@ -65,7 +65,7 @@
         return;
     }
     
-    [self.transmitter transmitVideoFrame:videoFrame repeatInterval:CMTimeMake(250, 1000) sink:sink];
+    [self.transmitter transmitVideoFrame:videoFrame sink:sink];
     
     self.lastSampleBuffer = sampleBuffer; // For telecine and to prevent tearing
 }

@@ -22,9 +22,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface VideoFrameTransmitter : NSObject
 
-- (void)transmitVideoFrame:(TVIVideoFrame *)videoFrame
-            repeatInterval:(CMTime)repeatInterval
-                      sink:(id<TVIVideoSink>)sink;
+- (void)transmitVideoFrame:(TVIVideoFrame *)videoFrame sink:(id<TVIVideoSink>)sink;
 
 @end
 

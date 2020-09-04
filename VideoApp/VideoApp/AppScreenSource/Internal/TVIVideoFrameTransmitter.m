@@ -43,7 +43,7 @@
 }
 
 - (void)transmitVideoFrame:(TVIVideoFrame *)videoFrame sink:(id<TVIVideoSink>)sink {
-    NSLog(@"Receive");
+//    NSLog(@"Receive");
     self.sink = sink;
     self.lastVideoFrame = videoFrame;
 //    [self.sink onVideoFrame:videoFrame];
@@ -53,14 +53,14 @@
     if (self.lastVideoFrame == nil) {
         return;
     }
-    
+
     CMTime currentTime = CMClockGetTime(CMClockGetHostTimeClock());
-    
+
     TVIVideoFrame *videoFrame = [[TVIVideoFrame alloc] initWithTimestamp:currentTime
                                                              buffer:self.lastVideoFrame.imageBuffer
                                                         orientation:self.lastVideoFrame.orientation];
-    
-    NSLog(@"Transmit");
+
+//    NSLog(@"Transmit");
     [self.sink onVideoFrame:videoFrame];
 }
 

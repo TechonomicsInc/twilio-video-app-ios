@@ -242,6 +242,8 @@
 		DC9A5E4D2463575F00E4B079 /* UserStoreFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC9A5E4A2463575F00E4B079 /* UserStoreFactory.swift */; };
 		DC9A5E5424638A9C00E4B079 /* ShowError.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC9A5E5224638A9C00E4B079 /* ShowError.swift */; };
 		DC9A5E5524638A9C00E4B079 /* ShowError.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC9A5E5224638A9C00E4B079 /* ShowError.swift */; };
+		DC9C773625028DA800AC68FD /* TVIScreenVideoFormatFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = DC9C773525028DA800AC68FD /* TVIScreenVideoFormatFactory.m */; };
+		DC9C773725028DA800AC68FD /* TVIScreenVideoFormatFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = DC9C773525028DA800AC68FD /* TVIScreenVideoFormatFactory.m */; };
 		DCA53949235F53E700CA26FB /* InternalAuthStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCA53947235F53E700CA26FB /* InternalAuthStore.swift */; };
 		DCA5394A235F53E700CA26FB /* InternalAuthStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCA53947235F53E700CA26FB /* InternalAuthStore.swift */; };
 		DCA5394D235F740200CA26FB /* AuthStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCA5394B235F740200CA26FB /* AuthStore.swift */; };
@@ -606,6 +608,8 @@
 		DC9A5E4A2463575F00E4B079 /* UserStoreFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserStoreFactory.swift; sourceTree = "<group>"; };
 		DC9A5E5224638A9C00E4B079 /* ShowError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowError.swift; sourceTree = "<group>"; };
 		DC9C773325015FAE00AC68FD /* TVIAppScreenSourceOptions+Internal.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "TVIAppScreenSourceOptions+Internal.h"; sourceTree = "<group>"; };
+		DC9C773425028DA800AC68FD /* TVIScreenVideoFormatFactory.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TVIScreenVideoFormatFactory.h; sourceTree = "<group>"; };
+		DC9C773525028DA800AC68FD /* TVIScreenVideoFormatFactory.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TVIScreenVideoFormatFactory.m; sourceTree = "<group>"; };
 		DCA53947235F53E700CA26FB /* InternalAuthStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InternalAuthStore.swift; sourceTree = "<group>"; };
 		DCA5394B235F740200CA26FB /* AuthStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthStore.swift; sourceTree = "<group>"; };
 		DCA5394F235F765D00CA26FB /* AuthFlow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthFlow.swift; sourceTree = "<group>"; };
@@ -1187,6 +1191,8 @@
 				DC7E090E24F5798E009F9603 /* TVIReplayKitSampleHandler.m */,
 				DC7E091124F5805C009F9603 /* TVIReplayKitVideoFrameFactory.h */,
 				DC7E091224F5805C009F9603 /* TVIReplayKitVideoFrameFactory.m */,
+				DC9C773425028DA800AC68FD /* TVIScreenVideoFormatFactory.h */,
+				DC9C773525028DA800AC68FD /* TVIScreenVideoFormatFactory.m */,
 				DC7E091724F5A5C7009F9603 /* TVIVideoFrameTransmitter.h */,
 				DC7E091824F5A5C7009F9603 /* TVIVideoFrameTransmitter.m */,
 			);
@@ -2311,6 +2317,7 @@
 				DCEC3D0F23860BBC00EBDEBF /* UITableViewHelpers.swift in Sources */,
 				DC44C2C323870D0800205174 /* BasicCell.swift in Sources */,
 				DC8AA8D42367A399006C06D5 /* TestSceneDelegate.swift in Sources */,
+				DC9C773625028DA800AC68FD /* TVIScreenVideoFormatFactory.m in Sources */,
 				DC1C2F8F23AC30070044FB4D /* AppInfoStoreFactory.swift in Sources */,
 				DC8EAE4923BA9F390045018F /* WindowSceneObserving.swift in Sources */,
 				DC7E091924F5A5C7009F9603 /* TVIVideoFrameTransmitter.m in Sources */,
@@ -2598,6 +2605,7 @@
 				DCB64B512409976F00E090BE /* APIRequest.swift in Sources */,
 				DC9A5E1F2461C0A100E4B079 /* MicTrackFactory.swift in Sources */,
 				DCB7C1832405BD2C009DEA70 /* PasscodeComponents.swift in Sources */,
+				DC9C773725028DA800AC68FD /* TVIScreenVideoFormatFactory.m in Sources */,
 				DC3C32D22417E6C400F56AFB /* CommunityAPIErrorResponseDecoder.swift in Sources */,
 				DCEDB3262464D7EE006AF70D /* RoomFactory.swift in Sources */,
 				DC9A5DD0245B0E6100E4B079 /* LocalParticipant.swift in Sources */,

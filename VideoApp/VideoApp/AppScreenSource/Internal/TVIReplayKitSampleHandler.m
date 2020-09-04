@@ -54,6 +54,8 @@
 
 - (void)handleVideoSample:(CMSampleBufferRef)sampleBuffer
                      sink:(id<TVIVideoSink>)sink {
+    // TODO: Validate sink
+    
     // TODO: If video content use telecine to determine if frame should be dropped or timestamp should be modified
     CMTime timestamp = CMSampleBufferGetPresentationTimeStamp(sampleBuffer);
     

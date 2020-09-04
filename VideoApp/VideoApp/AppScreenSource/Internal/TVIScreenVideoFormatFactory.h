@@ -14,13 +14,14 @@
 //  limitations under the License.
 //
 
-#import <CoreMedia/CoreMedia.h>
-
 @import TwilioVideo;
 
-@interface TVIReplayKitVideoFrameFactory : NSObject
+#import <Foundation/Foundation.h>
 
-- (TVIVideoFrame *)makeVideoFrameWithSample:(CMSampleBufferRef)sampleBuffer
-                                  timestamp:(CMTime)timestamp;
+#import "TVIScreenContent.h"
+
+@interface TVIScreenVideoFormatFactory : NSObject
+
+- (TVIVideoFormat *)makeVideoFormatForContent:(TVIScreenContent)content;
 
 @end

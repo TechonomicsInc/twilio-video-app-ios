@@ -20,10 +20,21 @@
 
 @implementation TVIAppScreenSourceOptionsBuilder
 
+- (instancetype)init {
+    self = nil;
+
+    NSException *exception = [NSException exceptionWithName:@"TVICameraSourceOptionsBuilderInitializationException"
+                                                     reason:@"Use the TVIAppScreenSourceOptionsBuilderBlock to configure a TVIAppScreenSourceOptionsBuilder instance."
+                                                   userInfo:nil];
+    [exception raise];
+
+    return self;
+}
+
 - (instancetype)initPrivate {
     self = [super init];
     if (self != nil) {
-        // Do init
+        _screenContent = TVIScreenContentDefault;
     }
     return self;
 }
@@ -32,10 +43,21 @@
 
 @implementation TVIAppScreenSourceOptions
 
+- (instancetype)init {
+    self = nil;
+
+    NSException *exception = [NSException exceptionWithName:@"TVIAppScreenSourceOptionsInitializationException"
+                                                     reason:@"Use optionsWithBlock: to create a TVIAppScreenSourceOptions instance."
+                                                   userInfo:nil];
+    [exception raise];
+
+    return self;
+}
+
 - (instancetype)initWithBuilder:(TVIAppScreenSourceOptionsBuilder *)builder {
     self = [super init];
     if (self) {
-        // Do init
+        _screenContent = builder.screenContent;
     }
     return self;
 }

@@ -20,10 +20,13 @@
 #import "TVIAppScreenSource.h"
 #import "TVIAppScreenSourceOptions+Internal.h"
 #import "TVIReplayKitSampleHandler.h"
+#import "TVIScreenVideoFormatFactory.h"
 
-@interface TVIAppScreenSource()
+@interface TVIAppScreenSource() <RPScreenRecorderDelegate>
 
+@property (nonatomic, strong) TVIAppScreenSourceOptions *options;
 @property (nonatomic, strong) TVIReplayKitSampleHandler *sampleHandler;
+@property (nonatomic, strong) TVIScreenVideoFormatFactory *videoFormatFactory;
 @property (nonatomic, strong) RPScreenRecorder *screenRecorder;
 @property (nonatomic, strong) dispatch_queue_t queue;
 
@@ -31,7 +34,6 @@
 
 @implementation TVIAppScreenSource
 
-@synthesize screencast;
 @synthesize sink;
 
 - (instancetype)init {
@@ -48,13 +50,15 @@
                        delegate:(nullable id<TVIAppScreenSourceDelegate>)delegate {
     self = [super init];
     if (self) {
+        _options = options;
         _delegate = delegate;
+        _sampleHandler = [TVIReplayKitSampleHandler new];
+        _videoFormatFactory = [TVIScreenVideoFormatFactory new];
         _screenRecorder = [RPScreenRecorder sharedRecorder];
+        _screenRecorder.delegate = self;
         _screenRecorder.microphoneEnabled = NO;
         _screenRecorder.cameraEnabled = NO;
-        _sampleHandler = [TVIReplayKitSampleHandler new];
         _queue = dispatch_get_main_queue();
-        screencast = YES;
         [self validateDelegate:delegate];
     }
     return self;
@@ -75,6 +79,18 @@
 }
 
 - (void)startCaptureWithCompletion:(nullable TVIAppScreenSourceStartedBlock)completion {
+    if (self.sink == nil) {
+        NSException *exception = [NSException exceptionWithName:NSInvalidArgumentException
+                                                         reason:@"A sink is required. Create a TVILocalVideoTrack first."
+                                                       userInfo:nil];
+        [exception raise];
+    }
+
+    if (self.sink.sourceRequirements == nil) {
+        TVIVideoFormat *videoFormat = [self.videoFormatFactory makeVideoFormatForContent:self.options.screenContent];
+        [self.sink onVideoFormatRequest:videoFormat];
+    }
+    
     __weak typeof(self) weakSelf = self;
     [self.screenRecorder startCaptureWithHandler:^(CMSampleBufferRef sampleBuffer, RPSampleBufferType bufferType, NSError *error) {
         __strong typeof(self) strongSelf = weakSelf;
@@ -90,22 +106,16 @@
             return;
         }
         
-        if (strongSelf.sink == nil) {
-            NSException *exception = [NSException exceptionWithName:NSInvalidArgumentException
-                                                             reason:@"A sink is required. Create a TVILocalVideoTrack first."
-                                                           userInfo:nil];
-            [exception raise];
-        }
-
         [strongSelf.sampleHandler handleSample:sampleBuffer bufferType:bufferType sink:strongSelf.sink];
     } completionHandler:^(NSError *error) {
         __strong typeof(self) strongSelf = weakSelf;
         if (!strongSelf) { return; }
 
-        // TODO: Set format
-        dispatch_async(strongSelf.queue, ^{
-            completion(strongSelf.sink.sourceRequirements, error);
-        });
+        if (completion) {
+            dispatch_async(strongSelf.queue, ^{
+                completion(strongSelf.sink.sourceRequirements, error);
+            });
+        }
     }];
 }
 
@@ -115,14 +125,36 @@
 
 - (void)stopCaptureWithCompletion:(nullable TVIAppScreenSourceStoppedBlock)completion {
     [self.screenRecorder stopCaptureWithHandler:^(NSError *error) {
-        dispatch_async(self.queue, ^{
-            completion(error);
-        });
+        if (completion) {
+            dispatch_async(self.queue, ^{
+                completion(error);
+            });
+        }
     }];
+}
+
+- (BOOL)isScreencast {
+    return YES;
 }
 
 - (void)requestOutputFormat:(nonnull TVIVideoFormat *)outputFormat {
     [self.sink onVideoFormatRequest:outputFormat];
+}
+
+- (void)screenRecorderDidChangeAvailability:(RPScreenRecorder *)screenRecorder {
+    if (screenRecorder.isAvailable) {
+        dispatch_async(self.queue, ^{
+            if ([self.delegate respondsToSelector:@selector(appScreenSourceDidBecomeAvailable:)]) {
+                [self.delegate appScreenSourceDidBecomeAvailable:self];
+            }
+        });
+    } else {
+        dispatch_async(self.queue, ^{
+            if ([self.delegate respondsToSelector:@selector(appScreenSourceDidBecomeUnavailable:)]) {
+                [self.delegate appScreenSourceDidBecomeUnavailable:self];
+            }
+        });
+    }
 }
 
 - (void)validateDelegate:(id<TVIAppScreenSourceDelegate>)delegate {
@@ -135,4 +167,3 @@
 }
 
 @end
-

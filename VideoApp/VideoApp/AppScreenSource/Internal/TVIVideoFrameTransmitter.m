@@ -18,10 +18,9 @@
 
 @interface TVIVideoFrameTransmitter()
 
-@property (nonatomic, retain) TVIVideoFrame *lastVideoFrame;
-//@property (nonatomic, strong) dispatch_queue_t queue; // Strong?
-@property (nonatomic, retain) CADisplayLink *displayLink;
 @property (nonatomic, retain) id<TVIVideoSink> sink;
+@property (nonatomic, retain) TVIVideoFrame *videoFrame;
+@property (nonatomic, retain) CADisplayLink *displayLink;
 
 @end
 
@@ -31,36 +30,37 @@
     self = [super init];
     
     if (self) {
-//        _queue = dispatch_queue_create("com.twilio.video.source.screen", DISPATCH_QUEUE_SERIAL); // More unique?
-//        dispatch_set_target_queue(_queue, dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0)); // Correct QOS?
-
         _displayLink = [CADisplayLink displayLinkWithTarget:self selector:@selector(timer:)];
         _displayLink.preferredFramesPerSecond = 30;
-        [_displayLink addToRunLoop:[NSRunLoop mainRunLoop] forMode:NSRunLoopCommonModes]; // Remove from run loop
+        [_displayLink addToRunLoop:[NSRunLoop mainRunLoop] forMode:NSRunLoopCommonModes];
     }
     
     return self;
 }
 
+- (void)dealloc {
+    [_displayLink invalidate];
+}
+
 - (void)transmitVideoFrame:(TVIVideoFrame *)videoFrame sink:(id<TVIVideoSink>)sink {
-//    NSLog(@"Receive");
+    NSParameterAssert(videoFrame);
+    NSParameterAssert(sink);
+    
     self.sink = sink;
-    self.lastVideoFrame = videoFrame;
-//    [self.sink onVideoFrame:videoFrame];
+    self.videoFrame = videoFrame;
 }
 
 - (void)timer:(CADisplayLink *)sender {
-    if (self.lastVideoFrame == nil) {
+    if (!self.videoFrame) {
         return;
     }
 
     CMTime currentTime = CMClockGetTime(CMClockGetHostTimeClock());
 
     TVIVideoFrame *videoFrame = [[TVIVideoFrame alloc] initWithTimestamp:currentTime
-                                                             buffer:self.lastVideoFrame.imageBuffer
-                                                        orientation:self.lastVideoFrame.orientation];
-
-//    NSLog(@"Transmit");
+                                                                  buffer:self.videoFrame.imageBuffer
+                                                             orientation:self.videoFrame.orientation];
+    
     [self.sink onVideoFrame:videoFrame];
 }
 

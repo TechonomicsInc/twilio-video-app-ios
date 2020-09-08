@@ -19,8 +19,6 @@
 #import <CoreMedia/CoreMedia.h>
 #import <ReplayKit/ReplayKit.h>
 
-NS_ASSUME_NONNULL_BEGIN
-
 @interface TVIReplayKitSampleHandler : NSObject
 
 - (void)handleSample:(CMSampleBufferRef)sampleBuffer
@@ -28,5 +26,3 @@ NS_ASSUME_NONNULL_BEGIN
                 sink:(id<TVIVideoSink>)sink;
 
 @end
-
-NS_ASSUME_NONNULL_END

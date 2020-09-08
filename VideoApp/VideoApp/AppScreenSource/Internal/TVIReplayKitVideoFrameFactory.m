@@ -14,59 +14,52 @@
 //  limitations under the License.
 //
 
+#import <CoreMedia/CoreMedia.h>
 #import <CoreVideo/CoreVideo.h>
 #import <ReplayKit/ReplayKit.h>
 
 #import "TVIReplayKitVideoFrameFactory.h"
 
+TVIVideoOrientation TVIOrientationForReplayKitVideoSample(CMSampleBufferRef sampleBuffer) {
+    NSNumber *orientation = (NSNumber *)CMGetAttachment(sampleBuffer, (CFStringRef)RPVideoSampleOrientationKey, nil);
+    
+    // RPScreenRecorder does not appear to set orientation but RPBroadcastSampleHandler does
+    if (!orientation) {
+        return TVIVideoOrientationUp;
+    }
+    
+    switch ((CGImagePropertyOrientation)orientation) {
+        case kCGImagePropertyOrientationUp: return TVIVideoOrientationUp;
+        case kCGImagePropertyOrientationUpMirrored: return TVIVideoOrientationUp;
+        case kCGImagePropertyOrientationLeft: return TVIVideoOrientationLeft;
+        case kCGImagePropertyOrientationLeftMirrored: return TVIVideoOrientationLeft;
+        case kCGImagePropertyOrientationRight: return TVIVideoOrientationRight;
+        case kCGImagePropertyOrientationRightMirrored: return TVIVideoOrientationRight;
+        case kCGImagePropertyOrientationDown: return TVIVideoOrientationDown;
+        case kCGImagePropertyOrientationDownMirrored: return TVIVideoOrientationDown;
+    }
+}
+
 @implementation TVIReplayKitVideoFrameFactory
 
-- (TVIVideoFrame *)makeVideoFrameWithSample:(CMSampleBufferRef)sampleBuffer
-                                  timestamp:(CMTime)timestamp {
+- (TVIVideoFrame *)makeVideoFrameWithSample:(CMSampleBufferRef)sampleBuffer {
+    NSParameterAssert(sampleBuffer);
+    
     CVImageBufferRef imageBuffer = CMSampleBufferGetImageBuffer(sampleBuffer);
     
-    if (imageBuffer == nil) { // Does nil work?
+    if (!imageBuffer) {
         return nil;
     }
-    
-    OSType pixelFormat = CVPixelBufferGetPixelFormatType(imageBuffer);
-    
-    if (pixelFormat != kCVPixelFormatType_420YpCbCr8BiPlanarFullRange) {
-        return nil;
-    }
-    
-    TVIVideoFrame *videoFrame = [[TVIVideoFrame alloc] initWithTimestamp:timestamp
-                                                                  buffer:imageBuffer
-                                                             orientation:TVIVideoOrientationUp]; // Fix
-    
-    if (videoFrame == nil) {
-        return nil;
-    }
-    
-    return videoFrame;
-}
 
-- (CGImagePropertyOrientation)imageOrientationForSample:(CMSampleBufferRef)sampleBuffer {
-    CFTypeRef attachment = CMGetAttachment(sampleBuffer, (CFStringRef)RPVideoSampleOrientationKey, nil);
-    
-    return (uint32_t)attachment;
-}
-
-- (TVIVideoOrientation)videoOrientationForImageOrientation:(CGImagePropertyOrientation)imageOrientation {
-    switch (imageOrientation) {
-        case kCGImagePropertyOrientationUp:
-        case kCGImagePropertyOrientationUpMirrored:
-            return TVIVideoOrientationUp;
-        case kCGImagePropertyOrientationLeft:
-        case kCGImagePropertyOrientationLeftMirrored:
-            return TVIVideoOrientationLeft;
-        case kCGImagePropertyOrientationRight:
-        case kCGImagePropertyOrientationRightMirrored:
-            return TVIVideoOrientationRight;
-        case kCGImagePropertyOrientationDown:
-        case kCGImagePropertyOrientationDownMirrored:
-            return TVIVideoOrientationDown;
+    if (CVPixelBufferGetPixelFormatType(imageBuffer) != kCVPixelFormatType_420YpCbCr8BiPlanarFullRange) {
+        return nil;
     }
+    
+    CMTime timestamp = CMSampleBufferGetPresentationTimeStamp(sampleBuffer);
+    
+    TVIVideoOrientation orientation = TVIOrientationForReplayKitVideoSample(sampleBuffer);
+    
+    return [[TVIVideoFrame alloc] initWithTimestamp:timestamp buffer:imageBuffer orientation:orientation];
 }
 
 @end

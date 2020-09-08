@@ -18,12 +18,8 @@
 
 #import <Foundation/Foundation.h>
 
-NS_ASSUME_NONNULL_BEGIN
-
 @interface TVIVideoFrameTransmitter : NSObject
 
 - (void)transmitVideoFrame:(TVIVideoFrame *)videoFrame sink:(id<TVIVideoSink>)sink;
 
 @end
-
-NS_ASSUME_NONNULL_END

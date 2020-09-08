@@ -20,7 +20,6 @@
 
 @interface TVIReplayKitSampleHandler()
 
-@property (nonatomic, assign) CMSampleBufferRef lastSampleBuffer;
 @property (nonatomic, retain) TVIReplayKitVideoFrameFactory *videoFrameFactory;
 @property (nonatomic, retain) TVIVideoFrameTransmitter *transmitter;
 
@@ -30,12 +29,10 @@
 
 - (instancetype)init {
     self = [super init];
-    
     if (self) {
         _videoFrameFactory = [TVIReplayKitVideoFrameFactory new];
         _transmitter = [TVIVideoFrameTransmitter new];
     }
-    
     return self;
 }
 
@@ -54,20 +51,17 @@
 
 - (void)handleVideoSample:(CMSampleBufferRef)sampleBuffer
                      sink:(id<TVIVideoSink>)sink {
-    // TODO: Validate sink
+    NSParameterAssert(sampleBuffer);
+    NSParameterAssert(sink);
     
-    // TODO: If video content use telecine to determine if frame should be dropped or timestamp should be modified
-    CMTime timestamp = CMSampleBufferGetPresentationTimeStamp(sampleBuffer);
-    
-    TVIVideoFrame *videoFrame = [self.videoFrameFactory makeVideoFrameWithSample:sampleBuffer timestamp:timestamp];
+    TVIVideoFrame *videoFrame = [self.videoFrameFactory makeVideoFrameWithSample:sampleBuffer];
 
-    if (videoFrame == nil) {
+    if (!videoFrame) {
         return;
     }
     
+    // Transform variable frame rate from ReplayKit to constant frame rate that is ideal for WebRTC
     [self.transmitter transmitVideoFrame:videoFrame sink:sink];
-    
-    self.lastSampleBuffer = sampleBuffer; // For telecine and to prevent tearing
 }
 
 @end

@@ -22,12 +22,10 @@
 
 - (instancetype)init {
     self = nil;
-
     NSException *exception = [NSException exceptionWithName:@"TVICameraSourceOptionsBuilderInitializationException"
                                                      reason:@"Use the TVIAppScreenSourceOptionsBuilderBlock to configure a TVIAppScreenSourceOptionsBuilder instance."
                                                    userInfo:nil];
     [exception raise];
-
     return self;
 }
 
@@ -45,12 +43,10 @@
 
 - (instancetype)init {
     self = nil;
-
     NSException *exception = [NSException exceptionWithName:@"TVIAppScreenSourceOptionsInitializationException"
                                                      reason:@"Use optionsWithBlock: to create a TVIAppScreenSourceOptions instance."
                                                    userInfo:nil];
     [exception raise];
-
     return self;
 }
 

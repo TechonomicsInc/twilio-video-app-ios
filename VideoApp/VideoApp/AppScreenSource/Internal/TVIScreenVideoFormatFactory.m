@@ -26,24 +26,19 @@
 - (TVIVideoFormat *)makeVideoFormatForContent:(TVIScreenContent)content {
     TVIVideoFormat *videoFormat = [TVIVideoFormat new];
     videoFormat.frameRate = 30;
-    // TODO: Set pixelFormat?
 
-    // TODO: Clean all of this up
-    CGSize screenSize = CGSizeMake(UIScreen.mainScreen.bounds.size.width * UIScreen.mainScreen.nativeScale,
-                                   UIScreen.mainScreen.bounds.size.height * UIScreen.mainScreen.nativeScale);
-
+    CGSize screenSize = UIScreen.mainScreen.nativeBounds.size;
+    
     switch (content) {
         case TVIScreenContentDefault:
             videoFormat.dimensions = (CMVideoDimensions){screenSize.width, screenSize.height};
             break;
         case TVIScreenContentVideo:
         {
-            int maxWidthOrHeight = 886;
-            CGSize downscaledTarget = CGSizeMake(maxWidthOrHeight, maxWidthOrHeight);
-            CGRect origin = CGRectMake(CGPointZero.x, CGPointZero.y, downscaledTarget.width, downscaledTarget.height);
-            CGRect fitRect = CGRectIntegral(AVMakeRectWithAspectRatioInsideRect(screenSize, origin));
-            CGSize outputSize = fitRect.size;
-            videoFormat.dimensions = (CMVideoDimensions){outputSize.width, outputSize.height};
+            CGFloat maxDimension = 886;
+            CGRect boundingRect = CGRectMake(CGPointZero.x, CGPointZero.y, maxDimension, maxDimension);
+            CGRect scaledRect = CGRectIntegral(AVMakeRectWithAspectRatioInsideRect(screenSize, boundingRect));
+            videoFormat.dimensions = (CMVideoDimensions){scaledRect.size.width, scaledRect.size.height};
             break;
         }
     }

@@ -28,8 +28,8 @@
 @property (nonatomic, strong) TVIReplayKitSampleHandler *sampleHandler;
 @property (nonatomic, strong) TVIScreenVideoFormatFactory *videoFormatFactory;
 @property (nonatomic, strong) RPScreenRecorder *screenRecorder;
-@property (nonatomic, strong) dispatch_queue_t queue;
-@property (nonatomic, strong) dispatch_queue_t serialQueue;
+@property (nonatomic, strong) dispatch_queue_t outputQueue;
+@property (nonatomic, strong) dispatch_queue_t inputQueue;
 
 @end
 
@@ -59,16 +59,16 @@
         _screenRecorder.delegate = self;
         _screenRecorder.microphoneEnabled = NO;
         _screenRecorder.cameraEnabled = NO;
-        _queue = dispatch_get_main_queue();
-        _serialQueue = dispatch_queue_create("com.twilio.video.source.screen.apiSerial", DISPATCH_QUEUE_SERIAL);
-        dispatch_set_target_queue(_serialQueue, dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0));
+        _outputQueue = dispatch_get_main_queue();
+        _inputQueue = dispatch_queue_create("com.twilio.video.appscreensource", DISPATCH_QUEUE_SERIAL);
+        dispatch_set_target_queue(_inputQueue, dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0));
         [self validateDelegate:delegate];
     }
     return self;
 }
 
 - (void)setDelegate:(id<TVIAppScreenSourceDelegate>)delegate {
-    dispatch_sync(self.serialQueue, ^{
+    dispatch_sync(self.inputQueue, ^{
         [self validateDelegate:delegate];
         _delegate = delegate;
     });
@@ -78,7 +78,7 @@
 {
     __block BOOL isAvailable;
     
-    dispatch_sync(self.serialQueue, ^{
+    dispatch_sync(self.inputQueue, ^{
         isAvailable = self.screenRecorder.isAvailable;
     });
     
@@ -90,15 +90,15 @@
 }
 
 - (void)startCaptureWithCompletion:(nullable TVIAppScreenSourceStartedBlock)completion {
-    dispatch_sync(self.serialQueue, ^{
-        if (self.sink == nil) {
+    dispatch_sync(self.inputQueue, ^{
+        if (!self.sink) {
             NSException *exception = [NSException exceptionWithName:NSInvalidArgumentException
                                                              reason:@"A sink is required. Create a TVILocalVideoTrack first."
                                                            userInfo:nil];
             [exception raise];
         }
 
-        if (self.sink.sourceRequirements == nil) {
+        if (!self.sink.sourceRequirements) {
             TVIVideoFormat *videoFormat = [self.videoFormatFactory makeVideoFormatForContent:self.options.screenContent];
             [self.sink onVideoFormatRequest:videoFormat];
         }
@@ -108,8 +108,8 @@
             __strong typeof(self) strongSelf = weakSelf;
             if (!strongSelf) { return; }
 
-            if (error != nil) {
-                dispatch_async(strongSelf.queue, ^{
+            if (error) {
+                dispatch_async(strongSelf.outputQueue, ^{
                     if ([strongSelf.delegate respondsToSelector:@selector(appScreenSource:didFailWithError:)]) {
                         [strongSelf.delegate appScreenSource:strongSelf didFailWithError:error];
                     }
@@ -124,7 +124,7 @@
             if (!strongSelf) { return; }
 
             if (completion) {
-                dispatch_async(strongSelf.queue, ^{
+                dispatch_async(strongSelf.outputQueue, ^{
                     completion(strongSelf.sink.sourceRequirements, error);
                 });
             }
@@ -137,10 +137,10 @@
 }
 
 - (void)stopCaptureWithCompletion:(nullable TVIAppScreenSourceStoppedBlock)completion {
-    dispatch_sync(self.serialQueue, ^{
+    dispatch_sync(self.inputQueue, ^{
         [self.screenRecorder stopCaptureWithHandler:^(NSError *error) {
             if (completion) {
-                dispatch_async(self.queue, ^{
+                dispatch_async(self.outputQueue, ^{
                     completion(error);
                 });
             }
@@ -153,29 +153,31 @@
 }
 
 - (void)requestOutputFormat:(nonnull TVIVideoFormat *)outputFormat {
-    dispatch_sync(self.serialQueue, ^{
+    dispatch_sync(self.inputQueue, ^{
         [self.sink onVideoFormatRequest:outputFormat];
     });
 }
 
 - (void)screenRecorderDidChangeAvailability:(RPScreenRecorder *)screenRecorder {
-    if (screenRecorder.isAvailable) {
-        dispatch_async(self.queue, ^{
-            if ([self.delegate respondsToSelector:@selector(appScreenSourceDidBecomeAvailable:)]) {
-                [self.delegate appScreenSourceDidBecomeAvailable:self];
-            }
-        });
-    } else {
-        dispatch_async(self.queue, ^{
-            if ([self.delegate respondsToSelector:@selector(appScreenSourceDidBecomeUnavailable:)]) {
-                [self.delegate appScreenSourceDidBecomeUnavailable:self];
-            }
-        });
-    }
+    dispatch_sync(self.inputQueue, ^{
+        if (screenRecorder.isAvailable) {
+            dispatch_async(self.outputQueue, ^{
+                if ([self.delegate respondsToSelector:@selector(appScreenSourceDidBecomeAvailable:)]) {
+                    [self.delegate appScreenSourceDidBecomeAvailable:self];
+                }
+            });
+        } else {
+            dispatch_async(self.outputQueue, ^{
+                if ([self.delegate respondsToSelector:@selector(appScreenSourceDidBecomeUnavailable:)]) {
+                    [self.delegate appScreenSourceDidBecomeUnavailable:self];
+                }
+            });
+        }
+    });
 }
 
 - (void)validateDelegate:(id<TVIAppScreenSourceDelegate>)delegate {
-    if (delegate != nil && ![delegate conformsToProtocol:@protocol(TVIAppScreenSourceDelegate)]) {
+    if (delegate && ![delegate conformsToProtocol:@protocol(TVIAppScreenSourceDelegate)]) {
         NSException *exception = [NSException exceptionWithName:NSInvalidArgumentException
                                                          reason:@"The supplied delegate does not conform to the TVIAppScreenSourceDelegate protocol."
                                                        userInfo:nil];

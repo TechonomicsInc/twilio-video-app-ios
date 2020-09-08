@@ -20,7 +20,6 @@
 
 @interface TVIReplayKitVideoFrameFactory : NSObject
 
-- (TVIVideoFrame *)makeVideoFrameWithSample:(CMSampleBufferRef)sampleBuffer
-                                  timestamp:(CMTime)timestamp;
+- (TVIVideoFrame *)makeVideoFrameWithSample:(CMSampleBufferRef)sampleBuffer;
 
 @end

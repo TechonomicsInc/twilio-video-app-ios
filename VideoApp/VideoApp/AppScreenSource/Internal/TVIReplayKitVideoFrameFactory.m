@@ -20,7 +20,7 @@
 
 #import "TVIReplayKitVideoFrameFactory.h"
 
-TVIVideoOrientation TVIOrientationForReplayKitVideoSample(CMSampleBufferRef sampleBuffer) {
+static TVIVideoOrientation SampleBufferGetOrientation(CMSampleBufferRef sampleBuffer) {
     NSNumber *orientation = (NSNumber *)CMGetAttachment(sampleBuffer, (CFStringRef)RPVideoSampleOrientationKey, nil);
     
     // RPScreenRecorder does not appear to set orientation but RPBroadcastSampleHandler does
@@ -57,7 +57,7 @@ TVIVideoOrientation TVIOrientationForReplayKitVideoSample(CMSampleBufferRef samp
     
     CMTime timestamp = CMSampleBufferGetPresentationTimeStamp(sampleBuffer);
     
-    TVIVideoOrientation orientation = TVIOrientationForReplayKitVideoSample(sampleBuffer);
+    TVIVideoOrientation orientation = SampleBufferGetOrientation(sampleBuffer);
     
     return [[TVIVideoFrame alloc] initWithTimestamp:timestamp buffer:imageBuffer orientation:orientation];
 }

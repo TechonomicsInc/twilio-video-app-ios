@@ -14,7 +14,7 @@
 //  limitations under the License.
 //
 
-import Foundation
+import TwilioVideo
 
 class AppScreenManager {
     let track: LocalVideoTrack

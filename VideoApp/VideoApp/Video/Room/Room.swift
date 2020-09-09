@@ -118,6 +118,7 @@ extension Room: TwilioVideo.RoomDelegate {
     }
     
     func roomDidDisconnect(room: TwilioVideo.Room, error: Error?) {
+        self.room = nil
         localParticipant.participant = nil
         let participants = remoteParticipants
         remoteParticipants.removeAll()

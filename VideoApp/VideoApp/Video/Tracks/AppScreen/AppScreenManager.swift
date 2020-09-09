@@ -18,9 +18,9 @@ import TwilioVideo
 
 class AppScreenManager {
     let track: LocalVideoTrack
-    private let source: TVIAppScreenSource
+    private let source: AppScreenSource
     
-    init(source: TVIAppScreenSource, track: LocalVideoTrack) {
+    init(source: AppScreenSource, track: LocalVideoTrack) {
         self.source = source
         self.track = track
     }

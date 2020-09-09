@@ -98,6 +98,11 @@ class LocalParticipant: NSObject, Participant {
         }
     }
     var participant: TwilioVideo.LocalParticipant? {
+        willSet {
+            if newValue == nil {
+                isSharingAppScreen = false
+            }
+        }
         didSet {
             guard let participant = participant else { return }
             

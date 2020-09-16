@@ -18,12 +18,15 @@ import TwilioVideo
 
 class AppScreenManagerFactory {
     func makeAppScreenManager() -> AppScreenManager? {
-        let source = AppScreenSource()
+        let options = AppScreenSourceOptions() { $0.screenContent = .default }
         
-        if let track = TwilioVideo.LocalVideoTrack(source: source, enabled: true, name: TrackName.screen) {
-            return AppScreenManager(source: source, track: LocalVideoTrack(track: track))
-        } else {
-            return nil
+        guard
+            let source = AppScreenSource(options: options, delegate: nil),
+            let track = TwilioVideo.LocalVideoTrack(source: source, enabled: true, name: TrackName.screen)
+            else {
+                return nil
         }
+        
+        return AppScreenManager(source: source, track: LocalVideoTrack(track: track))
     }
 }
